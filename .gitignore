@@ -1,0 +1,9 @@
+.next
+node_modules
+.env
+coverage
+playwright-report
+test-results
+prisma/dev.db
+public/uploads/*
+!public/uploads/.gitkeep

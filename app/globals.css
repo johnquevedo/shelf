@@ -1,0 +1,32 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  color-scheme: light;
+}
+
+body {
+  @apply bg-[#f5f1e8] text-slate-950 antialiased;
+}
+
+* {
+  scrollbar-color: #3b4d73 #09111f;
+}
+
+.glass-card {
+  @apply rounded-[28px] border border-white/10 bg-white/5 backdrop-blur-xl;
+}
+
+.shell-card {
+  @apply rounded-[28px] border border-line/70 bg-card/90 shadow-glow;
+}
+
+.shelf-row {
+  background:
+    linear-gradient(180deg, rgba(255,255,255,0.04), rgba(255,255,255,0.01)),
+    linear-gradient(90deg, rgba(0,0,0,0.18), rgba(255,255,255,0.02), rgba(0,0,0,0.15));
+  box-shadow:
+    inset 0 1px 0 rgba(255,255,255,0.08),
+    0 18px 30px rgba(0,0,0,0.2);
+}
