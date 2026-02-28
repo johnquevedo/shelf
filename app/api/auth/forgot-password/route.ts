@@ -7,12 +7,13 @@ import { issuePasswordResetEmail } from "@/lib/auth/email";
 export async function POST(request: Request) {
   try {
     const payload = forgotPasswordSchema.parse(await request.json());
+    const baseUrl = new URL(request.url).origin;
     const user = await prisma.user.findUnique({
       where: { email: payload.email.toLowerCase() }
     });
 
     if (user) {
-      await issuePasswordResetEmail({ id: user.id, email: user.email, name: user.name });
+      await issuePasswordResetEmail({ id: user.id, email: user.email, name: user.name }, { baseUrl });
     }
 
     return NextResponse.json({

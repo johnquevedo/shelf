@@ -2,12 +2,28 @@ import crypto from "crypto";
 import nodemailer from "nodemailer";
 import { prisma } from "@/lib/prisma";
 
-function getVerificationUrl(token: string) {
-  return `${process.env.NEXTAUTH_URL}/verify-email?token=${token}`;
+function resolveBaseUrl(baseUrl?: string) {
+  if (baseUrl) {
+    return baseUrl.replace(/\/$/, "");
+  }
+
+  if (process.env.NEXTAUTH_URL) {
+    return process.env.NEXTAUTH_URL.replace(/\/$/, "");
+  }
+
+  if (process.env.VERCEL_URL) {
+    return `https://${process.env.VERCEL_URL.replace(/\/$/, "")}`;
+  }
+
+  throw new Error("App URL is not configured. Set NEXTAUTH_URL or provide a request origin.");
 }
 
-function getPasswordResetUrl(token: string) {
-  return `${process.env.NEXTAUTH_URL}/reset-password?token=${token}`;
+function getVerificationUrl(token: string, baseUrl?: string) {
+  return `${resolveBaseUrl(baseUrl)}/verify-email?token=${token}`;
+}
+
+function getPasswordResetUrl(token: string, baseUrl?: string) {
+  return `${resolveBaseUrl(baseUrl)}/reset-password?token=${token}`;
 }
 
 function getEmailFrom() {
@@ -132,13 +148,16 @@ export async function createEmailVerificationToken(userId: string) {
   return token;
 }
 
-export async function issueVerificationEmail(user: { id: string; email: string; name: string }) {
+export async function issueVerificationEmail(
+  user: { id: string; email: string; name: string },
+  options?: { baseUrl?: string }
+) {
   await prisma.emailVerificationToken.deleteMany({
     where: { userId: user.id }
   });
 
   const token = await createEmailVerificationToken(user.id);
-  const url = getVerificationUrl(token);
+  const url = getVerificationUrl(token, options?.baseUrl);
   const text = `Hi ${user.name}, verify your Shelf account: ${url}`;
   const sent = await sendEmail({
     to: user.email,
@@ -168,13 +187,16 @@ export async function createPasswordResetToken(userId: string) {
   return token;
 }
 
-export async function issuePasswordResetEmail(user: { id: string; email: string; name: string }) {
+export async function issuePasswordResetEmail(
+  user: { id: string; email: string; name: string },
+  options?: { baseUrl?: string }
+) {
   await prisma.passwordResetToken.deleteMany({
     where: { userId: user.id }
   });
 
   const token = await createPasswordResetToken(user.id);
-  const url = getPasswordResetUrl(token);
+  const url = getPasswordResetUrl(token, options?.baseUrl);
   const text = `Hi ${user.name}, reset your Shelf password: ${url}`;
 
   await sendEmail({

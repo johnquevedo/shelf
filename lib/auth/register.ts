@@ -5,7 +5,7 @@ import { createDefaultShelvesForUser } from "@/lib/books/shelves";
 import { issueVerificationEmail } from "@/lib/auth/email";
 import { registerSchema } from "@/lib/validators/auth";
 
-export async function registerUser(input: unknown) {
+export async function registerUser(input: unknown, options?: { baseUrl?: string }) {
   const parsed = registerSchema.parse(input);
   const email = parsed.email.toLowerCase();
   const usernameBase = slugify(email.split("@")[0], { lower: true, strict: true }) || "reader";
@@ -29,7 +29,10 @@ export async function registerUser(input: unknown) {
   });
 
   await createDefaultShelvesForUser(user.id);
-  const verification = await issueVerificationEmail({ id: user.id, email: user.email, name: user.name });
+  const verification = await issueVerificationEmail(
+    { id: user.id, email: user.email, name: user.name },
+    { baseUrl: options?.baseUrl }
+  );
 
   return { user, verification };
 }

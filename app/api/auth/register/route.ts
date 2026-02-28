@@ -6,7 +6,8 @@ import { registerUser } from "@/lib/auth/register";
 export async function POST(request: Request) {
   try {
     const payload = await request.json();
-    const { user, verification } = await registerUser(payload);
+    const baseUrl = new URL(request.url).origin;
+    const { user, verification } = await registerUser(payload, { baseUrl });
     return NextResponse.json({ id: user.id, verificationSent: verification.sent });
   } catch (error) {
     if (error instanceof ZodError) {
