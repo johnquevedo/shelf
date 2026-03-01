@@ -17,6 +17,7 @@ model User {
   username     String       @unique
   bio          String?
   imageUrl     String?
+  notificationsSeenAt DateTime?
   createdAt    DateTime     @default(now())
   shelves      Shelf[]
   reviews      Review[]

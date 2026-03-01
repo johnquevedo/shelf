@@ -25,7 +25,7 @@ export default async function HomePage() {
           <p className="text-xs uppercase tracking-[0.3em] text-white/35">What&apos;s happening</p>
           {featuredReview ? (
             <div className="mt-4 rounded-[28px] border border-white/10 bg-white/5 p-6">
-              <p className="font-display text-4xl">{featuredReview.book.title}</p>
+              <p className="font-display text-3xl sm:text-4xl">{featuredReview.book.title}</p>
               <p className="mt-3 max-w-2xl text-sm leading-6 text-white/70">
                 {featuredReview.body}
               </p>
@@ -34,7 +34,7 @@ export default async function HomePage() {
         </div>
 
         <div className="space-y-4">
-          <div className="flex items-center justify-between">
+          <div className="flex flex-col gap-1 sm:flex-row sm:items-center sm:justify-between">
             <h2 className="font-display text-3xl">Your Following</h2>
             <p className="text-sm text-white/40">Latest from people you follow</p>
           </div>
@@ -74,7 +74,7 @@ export default async function HomePage() {
             {suggestedReaders.map((reader) => (
               <div
                 key={reader.id}
-                className="flex items-center justify-between rounded-[24px] border border-white/10 bg-white/5 p-4"
+                className="flex flex-col gap-3 rounded-[24px] border border-white/10 bg-white/5 p-4 sm:flex-row sm:items-center sm:justify-between"
               >
                 <div>
                   <Link href={`/users/${reader.username}`} className="font-semibold">

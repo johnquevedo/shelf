@@ -12,7 +12,7 @@ export default async function SettingsPage() {
   return (
     <div className="space-y-6">
       <div>
-        <h1 className="font-display text-5xl">Settings</h1>
+        <h1 className="font-display text-4xl sm:text-5xl">Settings</h1>
         <p className="mt-2 text-sm text-white/50">Manage your public profile and bring in prior reading history.</p>
       </div>
       <section className="shell-card p-6">

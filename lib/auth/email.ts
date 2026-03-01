@@ -2,17 +2,22 @@ import crypto from "crypto";
 import nodemailer from "nodemailer";
 import { prisma } from "@/lib/prisma";
 
+function normalizeBaseUrl(value?: string | null) {
+  if (!value) return null;
+  return value.replace(/\/$/, "");
+}
+
 function resolveBaseUrl(baseUrl?: string) {
   if (baseUrl) {
-    return baseUrl.replace(/\/$/, "");
+    return normalizeBaseUrl(baseUrl);
   }
 
   if (process.env.NEXTAUTH_URL) {
-    return process.env.NEXTAUTH_URL.replace(/\/$/, "");
+    return normalizeBaseUrl(process.env.NEXTAUTH_URL);
   }
 
   if (process.env.VERCEL_URL) {
-    return `https://${process.env.VERCEL_URL.replace(/\/$/, "")}`;
+    return `https://${normalizeBaseUrl(process.env.VERCEL_URL)}`;
   }
 
   throw new Error("App URL is not configured. Set NEXTAUTH_URL or provide a request origin.");

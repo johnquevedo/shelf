@@ -1,15 +1,16 @@
 import Link from "next/link";
 import { requireUser } from "@/lib/auth/session";
-import { getNotifications } from "@/lib/notifications";
+import { getNotifications, markNotificationsSeen } from "@/lib/notifications";
 
 export default async function NotificationsPage() {
   const user = await requireUser();
+  await markNotificationsSeen(user.id);
   const notifications = await getNotifications(user.id);
 
   return (
     <div className="space-y-6">
       <div>
-        <h1 className="font-display text-5xl">Notifications</h1>
+        <h1 className="font-display text-4xl sm:text-5xl">Notifications</h1>
         <p className="mt-2 text-sm text-white/50">Likes, comments, and follows across your account.</p>
       </div>
       <section className="shell-card p-6">

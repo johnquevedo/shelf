@@ -40,7 +40,7 @@ export default async function AppLayout({ children }: { children: React.ReactNod
           counters={counters}
           notificationCount={notificationCount}
         />
-        <main className="px-4 py-6 md:px-8">{children}</main>
+        <main className="px-4 py-6 pb-24 md:px-8 md:pb-6">{children}</main>
       </div>
     </div>
   );

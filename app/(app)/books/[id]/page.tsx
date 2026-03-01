@@ -73,12 +73,12 @@ export default async function BookDetailPage({
     <div className="space-y-6">
       <section className="shell-card p-6">
         <div className="grid gap-6 lg:grid-cols-[280px_1fr]">
-          <div className="mx-auto h-[390px] w-[280px]">
+          <div className="mx-auto aspect-[2/3] w-full max-w-[280px]">
             <BookCover title={book.title} coverUrl={book.coverUrl} />
           </div>
           <div>
             <p className="text-xs uppercase tracking-[0.3em] text-white/35">Book</p>
-            <h1 className="mt-3 font-display text-5xl">{book.title}</h1>
+            <h1 className="mt-3 font-display text-4xl sm:text-5xl">{book.title}</h1>
             <p className="mt-3 text-lg text-white/60">
               {book.authors.map((author) => author.author.name).join(", ")}
             </p>

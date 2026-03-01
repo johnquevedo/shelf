@@ -12,9 +12,9 @@ export default async function JournalPage() {
     <div className="space-y-6">
       <section className="grid gap-6 xl:grid-cols-[1fr_360px]">
         <div className="shell-card p-6">
-          <div className="flex items-center justify-between">
+          <div className="flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
             <div>
-              <h1 className="font-display text-5xl">Journal</h1>
+              <h1 className="font-display text-4xl sm:text-5xl">Journal</h1>
               <p className="mt-2 text-sm text-white/50">Track pages, keep a streak, and see your cadence clearly.</p>
             </div>
             <div className="rounded-full border border-white/10 bg-white/5 px-4 py-2 text-sm text-accent">
@@ -47,7 +47,7 @@ export default async function JournalPage() {
                     <BookCover title={item.book.title} coverUrl={item.book.coverUrl} />
                   </div>
                   <div>
-                    <p className="font-semibold">{item.book.title}</p>
+                    <p className="line-clamp-2 font-semibold">{item.book.title}</p>
                     <p className="mt-1 text-sm text-white/45">
                       {item.book.authors.map((author) => author.author.name).join(", ")}
                     </p>
@@ -72,7 +72,7 @@ export default async function JournalPage() {
         <h2 className="font-display text-3xl">Recent logs</h2>
         <div className="mt-4 space-y-3">
           {logs.slice(0, 10).map((log) => (
-            <div key={log.id} className="flex items-center justify-between rounded-[22px] bg-white/5 px-4 py-3">
+            <div key={log.id} className="flex flex-col gap-2 rounded-[22px] bg-white/5 px-4 py-3 sm:flex-row sm:items-center sm:justify-between">
               <div>
                 <p className="font-semibold">{log.book.title}</p>
                 <p className="text-sm text-white/45">{new Date(log.date).toLocaleDateString()}</p>

@@ -24,6 +24,7 @@ export function Topbar({
   const router = useRouter();
   const pathname = usePathname();
   const searchParams = useSearchParams();
+  const hideNotificationBadge = pathname.startsWith("/notifications");
 
   useEffect(() => {
     if (pathname.startsWith("/explore")) {
@@ -35,9 +36,9 @@ export function Topbar({
   }, [pathname, searchParams]);
 
   return (
-    <header className="sticky top-0 z-20 flex items-center gap-4 border-b border-white/10 bg-[#0f1728]/90 px-4 py-4 backdrop-blur md:px-8">
+    <header className="sticky top-0 z-20 flex flex-wrap items-center gap-3 border-b border-white/10 bg-[#0f1728]/90 px-4 py-4 backdrop-blur md:flex-nowrap md:gap-4 md:px-8">
       <form
-        className="relative flex-1"
+        className="relative order-2 w-full md:order-1 md:flex-1"
         onSubmit={(event) => {
           event.preventDefault();
           const trimmed = query.trim();
@@ -52,7 +53,7 @@ export function Topbar({
           placeholder="Search for books, authors, friends, and more…"
         />
       </form>
-      <div className="hidden items-center gap-3 lg:flex">
+      <div className="order-1 mr-auto hidden items-center gap-3 lg:order-2 lg:flex">
         {counters.map((counter) => (
           <div key={counter.label} className="rounded-full border border-white/10 bg-white/5 px-4 py-2">
             <p className="text-[10px] uppercase tracking-[0.2em] text-white/40">{counter.label}</p>
@@ -60,9 +61,9 @@ export function Topbar({
           </div>
         ))}
       </div>
-      <Link href="/notifications" className="relative rounded-full border border-white/10 bg-white/5 p-3 text-white">
+      <Link href="/notifications" className="order-1 relative rounded-full border border-white/10 bg-white/5 p-3 text-white md:order-3">
         <Bell className="h-4 w-4" />
-        {notificationCount > 0 ? (
+        {!hideNotificationBadge && notificationCount > 0 ? (
           <span className="absolute -right-1 -top-1 flex h-5 min-w-5 items-center justify-center rounded-full bg-accent px-1 text-[10px] font-bold text-slate-950">
             {notificationCount > 9 ? "9+" : notificationCount}
           </span>
@@ -70,7 +71,7 @@ export function Topbar({
       </Link>
       <Link
         href="/settings"
-        className="flex items-center gap-3 rounded-full border border-white/10 bg-white/5 px-2 py-1.5 text-left"
+        className="order-1 flex items-center gap-2 rounded-full border border-white/10 bg-white/5 px-2 py-1.5 text-left md:order-4 md:gap-3"
       >
         <Avatar name={name} imageUrl={imageUrl} className="h-9 w-9" />
         <div className="hidden pr-3 md:block">
@@ -81,7 +82,7 @@ export function Topbar({
       </Link>
       <button
         onClick={() => signOut({ callbackUrl: "/" })}
-        className="rounded-full border border-white/10 bg-white/5 p-3 text-white"
+        className="order-1 rounded-full border border-white/10 bg-white/5 p-3 text-white md:order-5"
         aria-label="Sign out"
       >
         <LogOut className="h-4 w-4" />

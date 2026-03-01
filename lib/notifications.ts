@@ -86,9 +86,17 @@ export async function getNotifications(userId: string) {
 }
 
 export async function getNotificationCount(userId: string) {
+  const user = await prisma.user.findUnique({
+    where: { id: userId },
+    select: { notificationsSeenAt: true }
+  });
+  const seenAt = user?.notificationsSeenAt ?? null;
+  const unseenFilter = seenAt ? { gt: seenAt } : undefined;
+
   const [likesCount, commentsCount, followsCount] = await Promise.all([
     prisma.like.count({
       where: {
+        ...(unseenFilter ? { createdAt: unseenFilter } : {}),
         userId: {
           not: userId
         },
@@ -99,6 +107,7 @@ export async function getNotificationCount(userId: string) {
     }),
     prisma.comment.count({
       where: {
+        ...(unseenFilter ? { createdAt: unseenFilter } : {}),
         userId: {
           not: userId
         },
@@ -109,10 +118,20 @@ export async function getNotificationCount(userId: string) {
     }),
     prisma.follow.count({
       where: {
+        ...(unseenFilter ? { createdAt: unseenFilter } : {}),
         followingId: userId
       }
     })
   ]);
 
   return likesCount + commentsCount + followsCount;
+}
+
+export async function markNotificationsSeen(userId: string) {
+  await prisma.user.update({
+    where: { id: userId },
+    data: {
+      notificationsSeenAt: new Date()
+    }
+  });
 }
