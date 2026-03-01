@@ -33,13 +33,13 @@ export function Modal({
         <Dialog.Overlay className="fixed inset-0 z-50 bg-slate-950/70 backdrop-blur-sm" />
         <Dialog.Content
           className={cn(
-            "fixed left-1/2 top-1/2 z-50 w-[calc(100vw-2rem)] max-w-md -translate-x-1/2 -translate-y-1/2 rounded-[32px] bg-white p-7 shadow-2xl",
+            "fixed left-1/2 top-1/2 z-50 max-h-[calc(100vh-2rem)] w-[calc(100vw-1rem)] max-w-md -translate-x-1/2 -translate-y-1/2 overflow-y-auto rounded-[28px] bg-white p-5 shadow-2xl sm:w-[calc(100vw-2rem)] sm:rounded-[32px] sm:p-7",
             contentClassName
           )}
         >
-          <div className={cn("mb-6 flex items-start justify-between", headerClassName)}>
+          <div className={cn("mb-5 flex items-start justify-between gap-4 sm:mb-6", headerClassName)}>
             <div>
-              <Dialog.Title className={cn("font-display text-2xl text-slate-950", titleClassName)}>
+              <Dialog.Title className={cn("font-display text-xl text-slate-950 sm:text-2xl", titleClassName)}>
                 {title}
               </Dialog.Title>
               {description ? (

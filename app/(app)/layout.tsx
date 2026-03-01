@@ -1,3 +1,4 @@
+import { unstable_noStore as noStore } from "next/cache";
 import { prisma } from "@/lib/prisma";
 import { requireUser } from "@/lib/auth/session";
 import { Sidebar } from "@/components/app-shell/sidebar";
@@ -6,6 +7,7 @@ import { getJournalStats } from "@/lib/journal/stats";
 import { getNotificationCount } from "@/lib/notifications";
 
 export default async function AppLayout({ children }: { children: React.ReactNode }) {
+  noStore();
   const sessionUser = await requireUser();
   const [user, distinctBooks, journalStats, notificationCount] = await Promise.all([
     prisma.user.findUniqueOrThrow({

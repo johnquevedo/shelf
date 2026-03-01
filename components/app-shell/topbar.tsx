@@ -21,10 +21,20 @@ export function Topbar({
   notificationCount: number;
 }) {
   const [query, setQuery] = useState("");
+  const [optimisticNotificationCount, setOptimisticNotificationCount] = useState(notificationCount);
   const router = useRouter();
   const pathname = usePathname();
   const searchParams = useSearchParams();
   const hideNotificationBadge = pathname.startsWith("/notifications");
+
+  useEffect(() => {
+    if (hideNotificationBadge) {
+      setOptimisticNotificationCount(0);
+      return;
+    }
+
+    setOptimisticNotificationCount(notificationCount);
+  }, [hideNotificationBadge, notificationCount]);
 
   useEffect(() => {
     if (pathname.startsWith("/explore")) {
@@ -61,11 +71,15 @@ export function Topbar({
           </div>
         ))}
       </div>
-      <Link href="/notifications" className="order-1 relative rounded-full border border-white/10 bg-white/5 p-3 text-white md:order-3">
+      <Link
+        href="/notifications"
+        className="order-1 relative rounded-full border border-white/10 bg-white/5 p-3 text-white md:order-3"
+        onClick={() => setOptimisticNotificationCount(0)}
+      >
         <Bell className="h-4 w-4" />
-        {!hideNotificationBadge && notificationCount > 0 ? (
+        {!hideNotificationBadge && optimisticNotificationCount > 0 ? (
           <span className="absolute -right-1 -top-1 flex h-5 min-w-5 items-center justify-center rounded-full bg-accent px-1 text-[10px] font-bold text-slate-950">
-            {notificationCount > 9 ? "9+" : notificationCount}
+            {optimisticNotificationCount > 9 ? "9+" : optimisticNotificationCount}
           </span>
         ) : null}
       </Link>
