@@ -8,9 +8,8 @@ Shelf is a social reading app inspired by Goodreads, built with a modern full-st
 
 ## Documentation
 
-- Architecture: [docs/ARCHITECTURE.md](/Users/johnquevedo/Downloads/project-one/docs/ARCHITECTURE.md)
-- Deployment: [docs/DEPLOYMENT.md](/Users/johnquevedo/Downloads/project-one/docs/DEPLOYMENT.md)
-- Contributing: [CONTRIBUTING.md](/Users/johnquevedo/Downloads/project-one/CONTRIBUTING.md)
+- Architecture: [docs/ARCHITECTURE.md](docs/ARCHITECTURE.md)
+- Deployment: [docs/DEPLOYMENT.md](docs/DEPLOYMENT.md)
 
 ## Tech stack
 

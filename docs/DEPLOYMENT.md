@@ -2,12 +2,12 @@
 
 This project is deployed on Vercel and uses hosted PostgreSQL plus external services for email and object storage.
 
-## Recommended stack
+## Current production stack
 
 - Vercel (app)
-- Supabase or Neon (PostgreSQL)
+- Supabase (PostgreSQL)
 - Resend (verification and reset email)
-- Cloudflare R2 or Amazon S3 (profile image uploads)
+- Cloudflare R2 (profile image uploads)
 
 ## Required environment variables
 
