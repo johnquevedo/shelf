@@ -1,6 +1,6 @@
 # Shelf
 
-Shelf is a social reading app inspired by Goodreads, built with a modern full-stack TypeScript setup. Users can discover books, organize shelves, write reviews, follow readers, track reading activity, and import existing Goodreads data.
+Shelf is a social reading app, built with a modern full-stack TypeScript setup. Users can discover books, organize shelves, write reviews, follow readers, track reading activity, and import existing Goodreads data.
 
 ## Live app
 
