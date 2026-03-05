@@ -108,10 +108,13 @@ export default function LandingPage() {
                       of noisy.”
                     </p>
                   </div>
-                  <div className="grid gap-3 sm:grid-cols-3">
+                  <div className="flex flex-wrap gap-3">
                     {["Trending", "Shelves", "Journal"].map((item) => (
-                      <div key={item} className="rounded-[22px] border border-white/10 bg-white/5 p-4">
-                        <p className="text-xs uppercase tracking-[0.2em] text-white/40">{item}</p>
+                      <div
+                        key={item}
+                        className="min-w-[92px] flex-1 rounded-[22px] border border-white/10 bg-white/5 p-4"
+                      >
+                        <p className="text-[10px] uppercase tracking-[0.08em] text-white/40">{item}</p>
                         <p className="mt-2 text-xl font-semibold">
                           {item === "Trending" ? "18" : item === "Shelves" ? "6" : "12d"}
                         </p>
