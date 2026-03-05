@@ -9,7 +9,6 @@ Shelf is a social reading app, built with a modern full-stack TypeScript setup. 
 ## Documentation
 
 - Architecture: [docs/ARCHITECTURE.md](docs/ARCHITECTURE.md)
-- Deployment: [docs/DEPLOYMENT.md](docs/DEPLOYMENT.md)
 
 ## Tech stack
 
@@ -70,49 +69,7 @@ npm run prisma:seed
 npm run dev
 ```
 
-## Environment variables
-
-Main required vars:
-
-```bash
-DATABASE_URL=postgresql://...
-DIRECT_URL=postgresql://...
-NEXTAUTH_URL=https://your-domain.com
-NEXTAUTH_SECRET=...
-RESEND_API_KEY=re_...
-EMAIL_FROM="Shelf <hello@your-domain.com>"
-```
-
-Object storage vars (for profile photos in production):
-
-```bash
-STORAGE_BUCKET=...
-STORAGE_REGION=...
-STORAGE_ENDPOINT=...
-STORAGE_ACCESS_KEY_ID=...
-STORAGE_SECRET_ACCESS_KEY=...
-STORAGE_PUBLIC_BASE_URL=...
-STORAGE_FORCE_PATH_STYLE=true|false
-```
-
-## Database and migrations
-
-- Use `DATABASE_URL` for app runtime
-- Use `DIRECT_URL` for Prisma schema operations/migrations
-
-Deploy migrations:
-
-```bash
-npx prisma migrate deploy
-```
-
-Check migration status:
-
-```bash
-npx prisma migrate status
-```
-
-## Testing and build
+## Build and test
 
 ```bash
 npm run build
@@ -127,7 +84,6 @@ npm run dev
 npm run build
 npm run prisma:migrate
 npm run prisma:seed
-npx prisma migrate deploy
 docker compose up -d
 docker compose down
 ```
