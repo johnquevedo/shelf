@@ -6,6 +6,12 @@ Shelf is a social reading app inspired by Goodreads, built with a modern full-st
 
 - Production URL: `https://shelf.johnfquevedo.com`
 
+## Documentation
+
+- Architecture: [docs/ARCHITECTURE.md](/Users/johnquevedo/Downloads/project-one/docs/ARCHITECTURE.md)
+- Deployment: [docs/DEPLOYMENT.md](/Users/johnquevedo/Downloads/project-one/docs/DEPLOYMENT.md)
+- Contributing: [CONTRIBUTING.md](/Users/johnquevedo/Downloads/project-one/CONTRIBUTING.md)
+
 ## Tech stack
 
 - Next.js 14 (App Router) + TypeScript
